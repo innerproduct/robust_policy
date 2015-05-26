@@ -1,0 +1,179 @@
+%
+%\documentclass[10pt]{article} 
+%\documentclass[tikz,border=10pt,10pt]{standalone}
+\documentclass[tikz,border=10pt,10pt]{article}
+\usepackage{tikz}
+\usetikzlibrary{graphdrawing}
+\usetikzlibrary{calc}
+\usetikzlibrary{graphs}
+\usegdlibrary{trees}
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article 
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%% \usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+\usepackage{textcomp}
+\usepackage{xspace}
+\usepackage{scrextend}
+\usepackage{authblk}
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{mathtools}
+\usepackage{tensor}
+
+\usepackage{xspace}
+\usepackage{verbatim}
+\usepackage{longtable}
+
+\usepackage[a4paper, top=0.5in, bottom=0.5in, left=0.5in, right=0.5in]{geometry}
+\linespread{1.05}         % Palatino needs more leading (space between lines)
+%\usepackage[T1]{fontenc}
+\usepackage[TS1,T1]{fontenc}
+%\usepackage{mathpazo}
+\usepackage[sc]{mathpazo}
+%another font
+%\usepackage{mathptmx}
+%
+%\usepackage{paralist}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+\newcommand{\cpp}{C++\xspace}
+\newcommand{\emcpp}{C\kern -0.0em\raise 0.4ex\hbox{\em++}\xspace}
+\newcommand{\charm}{Charm++\xspace}
+\newcommand{\chare}{\emph{chare}\xspace}
+\newcommand{\chares}{\emph{chares}\xspace}
+\newcommand{\EP}{\emph{entry method}\xspace}
+\newcommand{\EPs}{\emph{entry methods}\xspace}
+
+\newcommand{\sA}{Stage 1\xspace}
+\newcommand{\sB}{Stage 2\xspace}
+\newcommand{\slvrA}{\emph{Allocation Generator}\xspace}
+\newcommand{\slvrB}{\emph{Scenario Evaluator}\xspace}
+\newcommand{\slvrsB}{\emph{Scenario Evaluators}\xspace}
+\newcommand{\sBmgr}{\emph{Work Allocator}\xspace}
+\newcommand{\lp}{LP\xspace}
+\newcommand{\cw}{\emph{Cut Window}\xspace}
+
+\newcommand{\wh}{\widehat}
+\newcommand{\wt}{\widetilde}
+\newcommand{\thalf}{\textstyle \frac{1}{2}}
+\newcommand{\nchoosek}[2]{\left(\begin{array}{c}#1\\#2\end{array}\right)}
+\newcommand{\gap}{\vspace{0.1in}}
+\newcommand{\epc}{\hspace{1pc}}
+\newcommand{\sol}{\mbox{SOL}}
+\newcommand{\lcp}{\mbox{LCP}}
+\newcommand{\diag}{\mbox{Diag}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{example}{Example}
+\newtheorem{ex}{Example}
+\newtheorem{definition}{Definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{assumption}{Assumption}
+\newcommand{\argmax}{\operatornamewithlimits{\arg\max}}
+\newcommand{\argmin}{\operatornamewithlimits{\arg\min}}
+\hyphenation{stoch-astic}
+
+
+\title{Robust itinerary generation}
+\author[1]{Udatta Palekar}
+
+\begin{document}
+\maketitle
+\section{NP-completeness}
+\begin{thm} The ARSP problem is NP-complete on directed acyclic graphs with 2 scenarios
+\end{thm}
+
+\begin{proof} We reduce the 2-partition problem to the ARSP problem.
+\subsection{2-partition problem}
+\begin{addmargin}[5em]{8em}
+	\begin{description}
+	\item[Instance] A finite set of $m$ elements of sizes $a_i \in \mathbb{Z}_{+}$, for $i \in I$.
+	\item[Question] Is there a subset $I' \subseteq I$ such that $\displaystyle \sum_{i \in I'}a_i = \sum_{i \in I \setminus I'}a_i ~~$? 
+	\end{description} 
+\end{addmargin}
+\subsection{Reducing 2-partition to ARSP}
+
+Consider the graph $G = (V,E)$, where $$V = \{A_i,B_i : 0 \le m\} \cup \{s,t\}$$ and (directed) edges $$E = \{(A_i \rightarrow A_{i+1}), (B_i \rightarrow B_{i+1}), (A_i \rightarrow B_{i+1}), (B_i \rightarrow A_{i+1}): 0 \le m-1\} \cup \{(s \rightarrow A_0), (s \rightarrow B_0), (A_m \rightarrow t), (B_m \rightarrow t)\}.$$
+
+We consider just two scenarios $s = 1, 2$. In scenario 1, the weights of the edges between the $A-$ vertices are picked from the above finite set (in order) and all the other edges have weight $0$. Similarly, in scenario 2, the weights of the edges between the $B-$ vertices are picked from the above finite set (in order) and all the other edges have weight $0$. In either scenario, the cross-over edges merely provide a cost-free way of switching from $A-$edges to $B-$edges (or vice-versa).
+
+Any path from $s$ to $t$ must pick excatly one of $(A_i \rightarrow A_{i+1})$ or $(B_i \rightarrow B_{i+1})$ for every $i$. And therefore, there is a one-to-one correspondence between paths $\mathcal{P}$ from $s$ to $t$ and subsets $I_{\mathcal{P}}'$ of $I$: 
+
+\[
+i \in I_\mathcal{P}' \textrm{ if and only if the edge } (A_i \rightarrow A_{i+1}) \textrm{ is in }\mathcal{P}.
+\]
+
+It is clear that length of the path $\mathcal{P}$ is $\displaystyle \sum_{i \in I_{\mathcal{P}}'} a_i$ in scenario $1$ and its length is $\displaystyle \sum_{i \in I \setminus I_{\mathcal{P}}'} a_i$ in scenario $2$.
+
+Therefore, if there is a solution to ARSP with path length $\displaystyle \sum_{i \in I_{\mathcal{P}}'} a_i$, then there is a set partition. This concludes the proof of NP-completeness.
+
+
+\newpage
+
+\begin{tikzpicture}[>=stealth, every node/.style={circle, draw, minimum size=0.75cm}]
+%\graph [tree layout, grow=right, fresh nodes, level distance=0.5in, sibling distance=0.5in]
+\graph [ tree layout, grow=right, level distance=0.5in, sibling distance=0.5in]
+    {
+        s -> { 
+          A0 -> { A1 -> { A2 -> {A..., B...}, B2 }, B1 },
+          B0 -> { B1 -> { A2, B2 -> {A..., B...} }, A1 }        } 
+    };
+\end{tikzpicture}
+
+
+\end{proof}
+
+\end{document}

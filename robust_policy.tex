@@ -1,0 +1,161 @@
+%
+%\documentclass[10pt]{article} 
+%\documentclass[tikz,border=10pt,10pt]{standalone}
+\documentclass[tikz,border=10pt,10pt]{article}
+\usepackage{tikz}
+\usetikzlibrary{graphdrawing}
+\usetikzlibrary{calc}
+\usetikzlibrary{graphs}
+\usegdlibrary{trees}
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article 
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%% \usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+\usepackage{textcomp}
+\usepackage{xspace}
+\usepackage{scrextend}
+\usepackage{authblk}
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{mathtools}
+\usepackage{tensor}
+
+\usepackage{xspace}
+\usepackage{verbatim}
+\usepackage{longtable}
+
+\usepackage[a4paper, top=0.5in, bottom=0.5in, left=0.5in, right=0.5in]{geometry}
+\linespread{1.05}         % Palatino needs more leading (space between lines)
+%\usepackage[T1]{fontenc}
+\usepackage[TS1,T1]{fontenc}
+%\usepackage{mathpazo}
+\usepackage[sc]{mathpazo}
+%another font
+%\usepackage{mathptmx}
+%
+%\usepackage{paralist}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+\newcommand{\cpp}{C++\xspace}
+\newcommand{\emcpp}{C\kern -0.0em\raise 0.4ex\hbox{\em++}\xspace}
+\newcommand{\charm}{Charm++\xspace}
+\newcommand{\chare}{\emph{chare}\xspace}
+\newcommand{\chares}{\emph{chares}\xspace}
+\newcommand{\EP}{\emph{entry method}\xspace}
+\newcommand{\EPs}{\emph{entry methods}\xspace}
+
+\newcommand{\sA}{Stage 1\xspace}
+\newcommand{\sB}{Stage 2\xspace}
+\newcommand{\slvrA}{\emph{Allocation Generator}\xspace}
+\newcommand{\slvrB}{\emph{Scenario Evaluator}\xspace}
+\newcommand{\slvrsB}{\emph{Scenario Evaluators}\xspace}
+\newcommand{\sBmgr}{\emph{Work Allocator}\xspace}
+\newcommand{\lp}{LP\xspace}
+\newcommand{\cw}{\emph{Cut Window}\xspace}
+
+\newcommand{\wh}{\widehat}
+\newcommand{\wt}{\widetilde}
+\newcommand{\thalf}{\textstyle \frac{1}{2}}
+\newcommand{\nchoosek}[2]{\left(\begin{array}{c}#1\\#2\end{array}\right)}
+\newcommand{\gap}{\vspace{0.1in}}
+\newcommand{\epc}{\hspace{1pc}}
+\newcommand{\sol}{\mbox{SOL}}
+\newcommand{\lcp}{\mbox{LCP}}
+\newcommand{\diag}{\mbox{Diag}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{example}{Example}
+\newtheorem{ex}{Example}
+\newtheorem{definition}{Definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{assumption}{Assumption}
+\newcommand{\argmax}{\operatornamewithlimits{\arg\max}}
+\newcommand{\argmin}{\operatornamewithlimits{\arg\min}}
+\hyphenation{stoch-astic}
+
+
+\title{Robust Itinerary Generation}
+\author[1]{Udatta Palekar}
+
+\begin{document}
+\maketitle
+	\section{Introduction}
+	\input{intro}
+		\subsection{Literature Review}
+		\input{lit}
+	\section{Basic Formulation}
+	\input{formulation}
+	\section{Scenarios}
+	\input{scens}
+		\subsection{Disruptions and Recourses}
+		\input{disruptions}
+	\section{Graph Description}
+	\input{graph}
+		\subsection{Vertices}
+		\input{verts}
+		\subsection{Edges}
+		\input{edges}
+		\subsection{Policies and Edge weights}
+		\input{weights}
+	\section{Solution Approaches}
+	\input{approaches}
+	\section{Implementation Details}
+	\input{implementation}
+	\section{Numerical Results}
+	\input{results}
+	\section{Future Work}
+	\input{future}
+\end{document}
